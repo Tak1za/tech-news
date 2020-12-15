@@ -1,4 +1,4 @@
-package story
+package hn
 
 import (
 	"encoding/json"
@@ -14,20 +14,14 @@ import (
 
 // Story struct
 type Story struct {
-	By          string  `json:"by"`
-	Descendants int     `json:"descendants"`
-	ID          int     `json:"id"`
-	Kids        []int   `json:"kids"`
-	Time        float64 `json:"time"`
-	Title       string  `json:"title"`
-	Type        string  `json:"type"`
-	URL         string  `json:"url"`
+	Title string `json:"title"`
+	URL   string `json:"url"`
 }
 
 const (
 	defaultSize   int    = 10
 	defaultPage   int    = 1
-	maxPageSize   int    = 500
+	maxPageSize   int    = 50
 	getStoriesURL string = "https://hacker-news.firebaseio.com/v0/newstories.json"
 	getItemURL    string = "https://hacker-news.firebaseio.com/v0/item"
 )

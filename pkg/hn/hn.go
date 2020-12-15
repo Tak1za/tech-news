@@ -106,14 +106,22 @@ func getAndValidateQueryParams(c *gin.Context) (int, int, error) {
 
 func getItemIDs(pageSize, pageNumber int) ([]int, error) {
 	var items []int
-	response, err := http.Get(getStoriesURL)
+	client := &http.Client{}
+
+	req, err := http.NewRequest("GET", getStoriesURL, nil)
 	if err != nil {
 		log.Println(err)
 		return nil, err
 	}
-	defer response.Body.Close()
+	res, err := client.Do(req)
+	if err != nil {
+		log.Println(err)
+		return nil, err
+	}
 
-	data, err := ioutil.ReadAll(response.Body)
+	defer res.Body.Close()
+
+	data, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		log.Println(err)
 		return nil, err
@@ -143,7 +151,9 @@ func getItemIDs(pageSize, pageNumber int) ([]int, error) {
 
 func getItem(resChan *chan res, itemID int) {
 	var story Story
-	response, err := http.Get(getItemURL + fmt.Sprintf("/%d.json", itemID))
+	client := &http.Client{}
+
+	req, err := http.NewRequest("GET", fmt.Sprintf("%s/%d.json", getItemURL, itemID), nil)
 	if err != nil {
 		log.Println(err)
 		*resChan <- res{
@@ -151,9 +161,19 @@ func getItem(resChan *chan res, itemID int) {
 			Err:  err,
 		}
 	}
-	defer response.Body.Close()
 
-	data, err := ioutil.ReadAll(response.Body)
+	respone, err := client.Do(req)
+	if err != nil {
+		log.Println(err)
+		*resChan <- res{
+			Data: story,
+			Err:  err,
+		}
+	}
+
+	defer respone.Body.Close()
+
+	data, err := ioutil.ReadAll(respone.Body)
 	if err != nil {
 		log.Println(err)
 		*resChan <- res{

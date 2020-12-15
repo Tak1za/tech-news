@@ -1,0 +1,19 @@
+###
+
+GET http://localhost:8080/stories
+
+###
+
+GET http://localhost:8080/stories?size=20
+
+###
+
+GET http://localhost:8080/stories?page=2
+
+###
+
+GET http://localhost:8080/stories?page=4&size=300
+
+###
+
+GET http://localhost:8080/stories?page=-2&size=-300

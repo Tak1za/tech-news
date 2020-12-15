@@ -4,7 +4,7 @@ GET http://localhost:8080/stories
 
 ###
 
-GET http://localhost:8080/stories?size=20
+GET http://localhost:8080/stories?size=500
 
 ###
 

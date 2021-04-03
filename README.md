@@ -4,7 +4,7 @@ The latest and the greatest tech news from ***Hackernews*** and ***Reddit***, tw
 
 ## Tech Stack
 
-Create using **React**, with a **Go** based API backend. Also hosts a CLI application for the same for the console lovers written in **Go**.
+Created using **React**, with a **Go** based API backend. Also hosts a CLI application for the same for the console lovers written in **Go**.
 
 ## Screenshots
 
